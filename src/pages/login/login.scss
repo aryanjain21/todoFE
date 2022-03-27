@@ -1,0 +1,11 @@
+@import '../../sass/all.scss';
+
+.login_container {
+  @include breakpoint(sm) {
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

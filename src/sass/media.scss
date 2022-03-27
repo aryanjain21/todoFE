@@ -1,0 +1,39 @@
+$breakpoint_xs: 320px;
+$breakpoint_sm_phone: 600px;
+$breakpoint_sm: 768px;
+$breakpoint_md: 992px;
+$breakpoint_lg: 1200px;
+$breakpoint_xl: 1920px;
+
+@mixin breakpoint($size) {
+    @if $size==xs {
+        @media all and (min-width: $breakpoint_xs) {
+            @content;
+        }
+    }
+    @else if $size==sm_phone {
+        @media all and (min-width: $breakpoint_sm_phone) {
+            @content;
+        }
+    }
+    @else if $size==sm {
+        @media all and (min-width: $breakpoint_sm) {
+            @content;
+        }
+    }
+    @else if $size==md {
+        @media all and (min-width: $breakpoint_md) {
+            @content;
+        }
+    }
+    @else if $size==lg {
+        @media all and (min-width: $breakpoint_lg) {
+            @content;
+        }
+    }
+    @else if $size==xl {
+        @media all and (min-width: $breakpoint_xl) {
+            @content;
+        }
+    }
+}
