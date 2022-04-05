@@ -1,0 +1,83 @@
+@import '../../sass/all.scss';
+
+.header_container {
+    margin-bottom: 16px;
+    .inner_wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 8px 24px;
+        background-color: rgba(255,255,255,1);
+        border-bottom: 1px solid $color_light_gray_1;
+        .section_one {
+            display: flex;
+            align-items: center;
+            .menu_icon {
+                position: relative;
+                cursor: pointer;
+                padding: 10px;
+                margin-right: $semi_half_spacing;
+            }
+            .logo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+                width: max-content;
+                font-size: 22px;
+                line-height: 24px;
+                color: $color_btn;
+                margin-right: 24px;
+                @include font_roboto_medium;
+                font-weight: 900;
+            }
+            @include breakpoint(sm) {     
+                padding-right: 24px;
+            }
+        }
+        .section_three {
+            display: flex;
+            align-items: center;
+            .login {
+                margin-right: 24px;
+                cursor: pointer;
+            }
+            .profile_image {
+                width: fit-content;
+                font-size: 16px;
+                color: $color_light_gray_2;
+            }
+            .log_out {
+                cursor: pointer;
+                font-size: 14px;
+                line-height: 14px;
+                padding: 8px 16px;
+                color: $color_white;
+                border-radius: 10px;
+                margin-left: 12px;
+                text-transform: uppercase;
+                background-color: $color_btn;
+                @include font_roboto_medium;
+            }
+        }
+        .profile_section {
+            position: absolute;
+            top: 64px;
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            padding: 16px 12px;
+            border-radius: 10px;
+            background-color: $color_white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.40);
+            &.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    @include breakpoint(sm) {
+        margin-bottom: 32px;
+    }
+}

@@ -13,11 +13,11 @@ export const addTask = (data) => {
 }
 
 export const getTaskList = (data) => {
-    return axios.post(`${process.env.REACT_APP_BACKEND}/api/get-task-list`, data)
+    return axios.get(`${process.env.REACT_APP_BACKEND}/api/get-task-list`, data)
 }
 
 export const updateTask = (data) => {
-    return axios.put(`${process.env.REACT_APP_BACKEND}/api/update-task`, data);
+    return axios.post(`${process.env.REACT_APP_BACKEND}/api/update-task`, data);
 }
 
 export const deleteTask = (data) => {

@@ -1,0 +1,83 @@
+@import '../../sass/all.scss';
+
+.upcoming_task_container {
+    .head_txt {
+        font-size: 24px;
+        line-height: 28px;
+        color: $color_border;
+        font-weight: 900;
+        margin-bottom: 24px;
+    }
+    .inner_wrapper {
+        .header_section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 16px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid $color_light_gray_2;
+            background-color: $color_light_gray_1;
+            .title {
+                font-size: 16px;
+                line-height: 20px;
+                font-weight: 900;
+            }
+        }
+        .list_section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            .task {
+                width: 100%;
+                outline: none;
+                border: none;
+                font-size: 16px;
+                line-height: 20px;
+                padding: 11px 16px;
+                position: relative;
+                color: $color_border;
+                border-radius: 12px;
+                background-color: $color_off_white;
+                .task_date {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 4px;
+                    font-size: 12px;
+                    line-height: 14px;
+                    color: $color_light_gray;
+                }
+            }
+            .btn_section {
+                display: flex;
+                margin-left: 16px;
+                .btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 36px;
+                    height: 36px;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    img {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+                .edit_btn {
+                    margin-right: 12px;
+                    background-color: $color_btn;
+                }
+                .delete_btn {
+                    background-color: $color_error;
+                }
+            }
+        }
+    }
+    .no_task {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 12px;
+        color: $color_success;
+        background-color: $color_light_gray_1;
+    }
+}

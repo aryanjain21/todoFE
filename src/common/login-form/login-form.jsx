@@ -52,6 +52,11 @@ const LoginForm = (props) => {
                             let user = res.data.data;
                             localStorage.setItem('setUser', JSON.stringify({ firstName: user.firstName, lastName: user.lastName, email: user.email, token: user.token }));
                             userDispatch({ type: 'SIGNIN', payload: user });
+                            setTimeout(() => {
+                                if (typeof window !== 'undefined' && window.location) {
+                                    window.location.href = '/to-do';
+                                }
+                            }, 3000);
                         }
                     } catch (error) {
                         // setLoader(true);
