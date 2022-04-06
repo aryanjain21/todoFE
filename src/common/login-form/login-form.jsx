@@ -7,10 +7,12 @@ import { useState } from 'react';
 import { login } from '../../services/api';
 import { useUser } from '../../context/userContext';
 import { toast } from 'react-toastify';
+import CircleLoader from "react-spinners/CircleLoader";
 
 const LoginForm = (props) => {
 
     const { userDispatch } = useUser();
+    const [loader, setLoader] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const InitialValues = {
@@ -44,22 +46,20 @@ const LoginForm = (props) => {
                 validationSchema={ValidationSchema}
                 onSubmit={async (values) => {
                     try {
-                        // setLoader(true);
+                        setLoader(true);
                         const res = await login(values);
                         if (res.data.status === 200) {
                             toast.success(res.data.message);
-                            // setLoader(false);
+                            setLoader(false);
                             let user = res.data.data;
                             localStorage.setItem('setUser', JSON.stringify({ firstName: user.firstName, lastName: user.lastName, email: user.email, token: user.token }));
                             userDispatch({ type: 'SIGNIN', payload: user });
-                            setTimeout(() => {
-                                if (typeof window !== 'undefined' && window.location) {
-                                    window.location.href = '/to-do';
-                                }
-                            }, 3000);
+                            if (typeof window !== 'undefined' && window.location) {
+                                window.location.href = '/to-do';
+                            }
                         }
                     } catch (error) {
-                        // setLoader(true);
+                        setLoader(true);
                         toast.error(error?.response?.data?.message);
                     }
                 }}>
@@ -89,7 +89,14 @@ const LoginForm = (props) => {
             <div className='account_link'>
                 <span>New to To DO App? </span>
                 <a href='/signup'>Create Your Account</a>
-            </div>
+            </div>            
+            <CircleLoader css={`position: fixed;
+                                top: 0;
+                                right: 0;
+                                bottom: 0;
+                                left: 0;
+                                margin: auto;`}
+                size={50} color={'#24a0ed'} loading={loader} speedMultiplier={1} />
         </div>
     );
 }

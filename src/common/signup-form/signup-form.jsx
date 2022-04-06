@@ -6,9 +6,11 @@ import HidePassword from '../../assets/icon/close_eye.svg';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { signUp } from '../../services/api';
+import CircleLoader from "react-spinners/CircleLoader";
 
 const SignUpForm = () => {
 
+    const [loader, setLoader] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const InitialValues = {
@@ -51,17 +53,17 @@ const SignUpForm = () => {
                 validationSchema={ValidationSchema}
                 onSubmit={async (values) => {
                     try {
-                        // setLoader(true);
+                        setLoader(true);
                         const res = await signUp(values);
                         if (res.data.status === 200) {
                             toast.success(res.data.message);
-                            // setLoader(false);
+                            setLoader(false);
                             if (typeof window !== 'undefined' && window.location) {
                                 window.location.href = '/login'
                             }
                         }
                     } catch (error) {
-                        // setLoader(false);
+                        setLoader(false);
                         toast.error(error?.response?.data?.message);
                     }
                 }}>
@@ -105,6 +107,13 @@ const SignUpForm = () => {
             <div className='account_link'>
                 Already have account? <a href='/login'>Login</a>
             </div>
+            <CircleLoader css={`position: fixed;
+                                top: 0;
+                                right: 0;
+                                bottom: 0;
+                                left: 0;
+                                margin: auto;`}
+                size={50} color={'#24a0ed'} loading={loader} speedMultiplier={1} />
         </div>
     );
 }

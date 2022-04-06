@@ -10,7 +10,11 @@ const Header = (props) => {
         <div className='header_container'>
             <div className='inner_wrapper'>
                 <div className='section_one'>
-                    <div className='logo'>
+                    <div className='logo' onClick={() => {
+                        if (typeof window !== 'undefined' && window.location) {
+                            window.location.href = '/to-do';
+                        }
+                    }}>
                         <span className='txt'>Tasc</span>
                     </div>
                 </div>
@@ -18,7 +22,7 @@ const Header = (props) => {
                     {user.token &&
                         <>
                             <div className='profile_image'>
-                                {user && user.firstName && user.firstName} {user && user.lastName && user.lastName.charAt(0).toUpperCase()}
+                                {user && user.firstName && user.firstName.toUpperCase()} {user && user.lastName && user.lastName.charAt(0).toUpperCase()}
                             </div>
                             <div className='log_out' onClick={() => {
                                 if (typeof window !== 'undefined' && window.location) {

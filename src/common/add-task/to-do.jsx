@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 
 const ToDo = (props) => {
 
-    const { task, setTask, date, setDate, edit, setEdit, editId, handleEdit, handleDelete, taskCompleted } = props;
+    const { setLoader, task, setTask, date, setDate, edit, setEdit, editId, handleEdit, handleDelete, taskCompleted } = props;
 
     const { taskDispatch, contextTask } = useTask();
     const [todayList, setTodayList] = useState([]);
@@ -21,6 +21,8 @@ const ToDo = (props) => {
         const filterData = contextTask?.tasks?.filter(item => new Date(item.date).getDate() === new Date().getDate());
         if (filterData.length) {
             setTodayList(filterData);
+        } else {
+            setTodayList([]);   
         }
     }, [contextTask.tasks]);
 
@@ -39,6 +41,7 @@ const ToDo = (props) => {
             }
         }
         try {
+            setLoader(true);
             let addedTask;
             if (edit) {
                 addedTask = await updateTask(data);
@@ -46,6 +49,7 @@ const ToDo = (props) => {
                 addedTask = await addTask(data);
             }
             if (addedTask.data.status === 200) {
+                setLoader(false);
                 toast.success(addedTask.data.message);
                 taskDispatch({ type: edit ? 'UPDATE_TASK' : 'ADD', payload: addedTask.data.data });
                 setDate(new Date());
@@ -53,6 +57,7 @@ const ToDo = (props) => {
                 setEdit(false);
             }
         } catch (error) {
+            setLoader(false);
             toast.error(error?.response?.data?.message);
         }
     }

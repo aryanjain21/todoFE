@@ -31,6 +31,8 @@ const UpcomingTask = (props) => {
         });
         if (filterData.length) {
             setUpcomingTask(filterData);
+        } else {
+            setUpcomingTask([]);
         }
         // eslint-disable-next-line
     }, [list]);
