@@ -36,6 +36,29 @@ const LoginForm = (props) => {
             )
     });
 
+    const handleGuestLogin = async () => {
+        try {
+            setLoader(true);
+            const res = await login({
+                email: 'guest@gmail.com',
+                password: 'guest@123'
+            });
+            if (res.data.status === 200) {
+                toast.success(res.data.message);
+                setLoader(false);
+                let user = res.data.data;
+                localStorage.setItem('setUser', JSON.stringify({ firstName: user.firstName, lastName: user.lastName, email: user.email, token: user.token }));
+                userDispatch({ type: 'SIGNIN', payload: user });
+                if (typeof window !== 'undefined' && window.location) {
+                    window.location.href = '/to-do';
+                }
+            }
+        } catch (error) {
+            setLoader(true);
+            toast.error(error?.response?.data?.message);
+        }
+    }
+
     return (
         <div className='login_form_container'>
             <div className='title'>
@@ -86,6 +109,11 @@ const LoginForm = (props) => {
                     </div>
                 </Form>
             </Formik>
+            <div className='control_area'>
+                <div className='btn_area'>
+                    <button className='btn' type='submit' onClick={handleGuestLogin}>Guest Login</button>
+                </div>
+            </div>
             <div className='account_link'>
                 <span>New to To DO App? </span>
                 <a href='/signup'>Create Your Account</a>
